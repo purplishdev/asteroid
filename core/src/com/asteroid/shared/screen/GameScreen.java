@@ -1,4 +1,4 @@
-package com.asteroid.shared.screen.impl;
+package com.asteroid.shared.screen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

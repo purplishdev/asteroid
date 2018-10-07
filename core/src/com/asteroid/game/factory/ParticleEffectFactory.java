@@ -1,6 +1,6 @@
-package com.asteroid.factory;
+package com.asteroid.game.factory;
 
-import com.asteroid.AsteroidException;
+import com.asteroid.shared.AsteroidException;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 

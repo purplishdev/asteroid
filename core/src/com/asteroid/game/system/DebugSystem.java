@@ -1,4 +1,4 @@
-package com.asteroid.system;
+package com.asteroid.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.Entity;
@@ -6,9 +6,9 @@ import com.artemis.PooledComponent;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
 import com.artemis.utils.reflect.ClassReflection;
-import com.asteroid.Constants;
-import com.asteroid.component.DebugComponent;
-import com.asteroid.component.PlayerComponent;
+import com.asteroid.game.Constants;
+import com.asteroid.game.component.DebugComponent;
+import com.asteroid.game.component.PlayerComponent;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

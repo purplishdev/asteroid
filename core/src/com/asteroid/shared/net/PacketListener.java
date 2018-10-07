@@ -1,4 +1,8 @@
 package com.asteroid.shared.net;
 
-public interface PacketListener {
+import com.esotericsoftware.kryonet.Connection;
+
+public interface PacketListener<T> {
+
+    void received(Connection connection, T packet);
 }

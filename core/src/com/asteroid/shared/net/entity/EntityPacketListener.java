@@ -1,6 +1,6 @@
 package com.asteroid.shared.net.entity;
 
-public interface EntityAwarePacketListener<T> {
+public interface EntityPacketListener<T> {
 
-    void received(EntityAwareConnection connection, T packet);
+    void received(EntityConnection connection, T packet);
 }

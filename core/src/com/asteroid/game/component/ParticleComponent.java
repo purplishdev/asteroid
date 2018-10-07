@@ -1,8 +1,8 @@
-package com.asteroid.component;
+package com.asteroid.game.component;
 
 import com.artemis.Component;
 import com.artemis.annotations.PooledWeaver;
-import com.asteroid.factory.Particle;
+import com.asteroid.game.factory.Particle;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 
 @PooledWeaver

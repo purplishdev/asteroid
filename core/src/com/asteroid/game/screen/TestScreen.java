@@ -1,12 +1,13 @@
-package com.asteroid.screen;
+package com.asteroid.game.screen;
 
 import com.artemis.World;
-import com.asteroid.Constants;
-import com.asteroid.GameContext;
-import com.asteroid.asset.AssetModule;
-import com.asteroid.factory.BulletFactory;
-import com.asteroid.factory.PlayerFactory;
-import com.asteroid.system.InputSystem;
+import com.asteroid.game.Constants;
+import com.asteroid.game.GameContext;
+import com.asteroid.shared.asset.AssetModule;
+import com.asteroid.game.factory.BulletFactory;
+import com.asteroid.game.factory.PlayerFactory;
+import com.asteroid.game.system.InputSystem;
+import com.asteroid.shared.screen.AbstractGameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -35,7 +36,7 @@ public class TestScreen extends AbstractGameScreen {
         assetModule = game.getAssetModule();
         inputSystem = world.getSystem(InputSystem.class);
 
-        input.addProcessor(new InputAdapter() {
+        addInputProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keycode) {
                 switch (keycode) {
@@ -61,7 +62,7 @@ public class TestScreen extends AbstractGameScreen {
     @Override
     public void create() {
         bulletFactory = createBulletFactory(world);
-        playerFactory = createPlayerFactory(world);
+        playerFactory = createPlayerFactory();
         playerFactory.setWorld(world);
         player = playerFactory.create("Player", 150.0f, 150.0f, 15.0f);
     }
@@ -71,7 +72,7 @@ public class TestScreen extends AbstractGameScreen {
         handleInput();
     }
 
-    private PlayerFactory createPlayerFactory(World world) {
+    private PlayerFactory createPlayerFactory() {
         TextureRegion playerTexture = assetModule.getTextureFromSkin(Constants.Assets.SKIN, Constants.Assets.PLAYER_TEXTURE);
         Polygon playerPolygon = assetModule.get(Constants.Assets.PLAYER_POLYGON);
         return new PlayerFactory(playerTexture, playerPolygon);

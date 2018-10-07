@@ -1,4 +1,4 @@
-package com.asteroid.game.screen;
+package com.asteroid.shared.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -7,11 +7,7 @@ import lombok.NonNull;
 
 public class ScreenModuleImpl implements ScreenModule {
 
-    private GameScreen currentScreen;
-
-    public ScreenModuleImpl(@NonNull GameScreen currentScreen) {
-        setScreen(currentScreen);
-    }
+    private GameScreen currentScreen = new BlankScreen();
 
     @Override
     public void create() {

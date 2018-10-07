@@ -1,36 +1,38 @@
-package com.asteroid;
+package com.asteroid.game;
 
 import com.artemis.World;
 import com.artemis.WorldConfigurationBuilder;
-import com.asteroid.asset.AssetModule;
-import com.asteroid.asset.GdxAssetModule;
-import com.asteroid.asset.loader.PolygonLoader;
-import com.asteroid.factory.Particle;
-import com.asteroid.factory.ParticleEffectFactory;
-import com.asteroid.factory.PlayerFactory;
-import com.asteroid.screen.ScreenModule;
-import com.asteroid.screen.ScreenModuleImpl;
-import com.asteroid.screen.TestScreen;
-import com.asteroid.system.BulletCollisionResolveSystem;
-import com.asteroid.system.BulletSystem;
-import com.asteroid.system.CollisionSystem;
-import com.asteroid.system.DamageSystem;
-import com.asteroid.system.DebugSystem;
-import com.asteroid.system.ExplosionSystem;
-import com.asteroid.system.HealthSystem;
-import com.asteroid.system.InputSystem;
-import com.asteroid.system.LabelRenderSystem;
-import com.asteroid.system.MovementSystem;
-import com.asteroid.system.net.NetworkInputSystem;
-import com.asteroid.system.net.NetworkSystem;
-import com.asteroid.system.ParticleRenderSystem;
-import com.asteroid.system.PlayerCollisionResolveSystem;
-import com.asteroid.system.PlayerDeathSystem;
-import com.asteroid.system.RemoveSystem;
-import com.asteroid.system.SpawnSystem;
-import com.asteroid.system.TextureRenderSystem;
-import com.asteroid.system.TrailSystem;
-import com.asteroid.system.WaitForSpawnSystem;
+import com.asteroid.shared.asset.AssetModule;
+import com.asteroid.shared.asset.GdxAssetModule;
+import com.asteroid.shared.asset.loader.PolygonLoader;
+import com.asteroid.game.factory.Particle;
+import com.asteroid.game.factory.ParticleEffectFactory;
+import com.asteroid.game.factory.PlayerFactory;
+import com.asteroid.shared.net.NetworkModule;
+import com.asteroid.shared.net.NetworkModuleImpl;
+import com.asteroid.shared.screen.ScreenModule;
+import com.asteroid.shared.screen.ScreenModuleImpl;
+import com.asteroid.game.screen.TestScreen;
+import com.asteroid.game.system.BulletCollisionResolveSystem;
+import com.asteroid.game.system.BulletSystem;
+import com.asteroid.game.system.CollisionSystem;
+import com.asteroid.game.system.DamageSystem;
+import com.asteroid.game.system.DebugSystem;
+import com.asteroid.game.system.ExplosionSystem;
+import com.asteroid.game.system.HealthSystem;
+import com.asteroid.game.system.InputSystem;
+import com.asteroid.game.system.LabelRenderSystem;
+import com.asteroid.game.system.MovementSystem;
+import com.asteroid.game.system.net.NetworkInputSystem;
+import com.asteroid.game.system.net.NetworkSystem;
+import com.asteroid.game.system.ParticleRenderSystem;
+import com.asteroid.game.system.PlayerCollisionResolveSystem;
+import com.asteroid.game.system.PlayerDeathSystem;
+import com.asteroid.game.system.RemoveSystem;
+import com.asteroid.game.system.SpawnSystem;
+import com.asteroid.game.system.TextureRenderSystem;
+import com.asteroid.game.system.TrailSystem;
+import com.asteroid.game.system.WaitForSpawnSystem;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
@@ -59,15 +61,20 @@ public class Asteroid implements GameContext, ApplicationListener {
 
 	private AssetModule assetModule;
 
-	private PlayerFactory playerFactory;
+	private NetworkModule networkModule;
 
 	@Override
 	public void create() {
 		createBatch();
 		createAssets();
 		createCameraAndViewport();
+		createNetwork();
 		createEngine();
         createScreens();
+	}
+
+	private void createNetwork() {
+		networkModule = new NetworkModuleImpl();
 	}
 
 	private void createAssets() {
@@ -95,7 +102,7 @@ public class Asteroid implements GameContext, ApplicationListener {
 
 		TextureRegion playerTexture = assetModule.getTextureFromSkin(Constants.Assets.SKIN, Constants.Assets.PLAYER_TEXTURE);
 		Polygon playerPolygon = assetModule.get(Constants.Assets.PLAYER_POLYGON);
-		playerFactory = new PlayerFactory(playerTexture, playerPolygon);
+		PlayerFactory playerFactory = new PlayerFactory(playerTexture, playerPolygon);
 
 		var config = new WorldConfigurationBuilder()
 				.with(new InputSystem(),
@@ -122,6 +129,7 @@ public class Asteroid implements GameContext, ApplicationListener {
 				.register(spriteBatch)
 				.register(particleFactory)
 				.register(playerFactory)
+				.register(networkModule)
 				.register("font_32", font32);
 
 		world = new World(config);
@@ -133,7 +141,8 @@ public class Asteroid implements GameContext, ApplicationListener {
 	}
 
 	private void createScreens() {
-		screenModule = new ScreenModuleImpl(new TestScreen(this));
+		screenModule = new ScreenModuleImpl();
+		screenModule.setScreen(new TestScreen(this));
 	}
 
 	@Override

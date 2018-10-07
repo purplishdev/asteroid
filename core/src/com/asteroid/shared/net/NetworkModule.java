@@ -1,8 +1,8 @@
-package com.asteroid.net;
+package com.asteroid.shared.net;
 
 public interface NetworkModule {
-    int DEFAULT_TCP_PORT = 60000;
-    int DEFAULT_UDP_PORT = 60001;
 
-    GameServer createServer();
+    GameServer getServer();
+
+    GameClient getClient();
 }

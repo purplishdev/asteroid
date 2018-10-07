@@ -1,13 +1,13 @@
-package com.asteroid.system;
+package com.asteroid.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.annotations.Wire;
-import com.asteroid.component.DeathComponent;
-import com.asteroid.component.MovementComponent;
-import com.asteroid.component.ParticleComponent;
-import com.asteroid.component.RemoveComponent;
-import com.asteroid.factory.ParticleEffectFactory;
+import com.asteroid.game.component.DeathComponent;
+import com.asteroid.game.component.MovementComponent;
+import com.asteroid.game.component.ParticleComponent;
+import com.asteroid.game.component.RemoveComponent;
+import com.asteroid.game.factory.ParticleEffectFactory;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 

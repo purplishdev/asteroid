@@ -1,4 +1,4 @@
-package com.asteroid.net.exception;
+package com.asteroid.shared.net.exception;
 
 public class ConnectionException extends RuntimeException {
     public ConnectionException() {

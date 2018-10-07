@@ -1,4 +1,13 @@
 package com.asteroid.shared.net.packet;
 
-public class Packet {
+public interface Packet {
+
+    enum Protocol {
+        TCP,
+        UDP
+    }
+
+    default Protocol getProtocol() {
+        return Protocol.TCP;
+    }
 }

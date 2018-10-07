@@ -1,14 +1,14 @@
-package com.asteroid.factory;
+package com.asteroid.game.factory;
 
 import com.artemis.Archetype;
 import com.artemis.ArchetypeBuilder;
 import com.artemis.World;
-import com.asteroid.AsteroidException;
-import com.asteroid.Constants;
-import com.asteroid.component.BulletComponent;
-import com.asteroid.component.CollisionComponent;
-import com.asteroid.component.MovementComponent;
-import com.asteroid.component.TextureComponent;
+import com.asteroid.shared.AsteroidException;
+import com.asteroid.game.Constants;
+import com.asteroid.game.component.BulletComponent;
+import com.asteroid.game.component.CollisionComponent;
+import com.asteroid.game.component.MovementComponent;
+import com.asteroid.game.component.TextureComponent;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;

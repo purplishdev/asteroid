@@ -1,12 +1,12 @@
-package com.asteroid.system;
+package com.asteroid.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
-import com.asteroid.Constants;
-import com.asteroid.component.DeathComponent;
-import com.asteroid.component.RemoveComponent;
-import com.asteroid.component.SpawnComponent;
-import com.asteroid.component.WaitForSpawnComponent;
+import com.asteroid.game.Constants;
+import com.asteroid.game.component.DeathComponent;
+import com.asteroid.game.component.RemoveComponent;
+import com.asteroid.game.component.SpawnComponent;
+import com.asteroid.game.component.WaitForSpawnComponent;
 import com.badlogic.gdx.math.MathUtils;
 
 import lombok.var;

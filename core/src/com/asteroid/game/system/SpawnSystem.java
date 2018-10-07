@@ -1,9 +1,9 @@
-package com.asteroid.system;
+package com.asteroid.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
-import com.asteroid.component.MovementComponent;
-import com.asteroid.component.SpawnComponent;
+import com.asteroid.game.component.MovementComponent;
+import com.asteroid.game.component.SpawnComponent;
 
 import lombok.var;
 

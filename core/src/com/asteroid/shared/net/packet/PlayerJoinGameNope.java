@@ -1,9 +1,11 @@
-package com.asteroid.net.packet;
+package com.asteroid.shared.net.packet;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@Value
-public class PlayerJoinGameNope {
+@AllArgsConstructor
+@NoArgsConstructor
+public class PlayerJoinGameNope implements Packet {
 
-    private String rejectionDescription;
+    public String rejectionDescription;
 }

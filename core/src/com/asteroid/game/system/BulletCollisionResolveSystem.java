@@ -1,13 +1,13 @@
-package com.asteroid.system;
+package com.asteroid.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
-import com.asteroid.component.BulletComponent;
-import com.asteroid.component.CollidedComponent;
-import com.asteroid.component.DamageComponent;
-import com.asteroid.component.DeathComponent;
-import com.asteroid.component.PlayerComponent;
-import com.asteroid.component.RemoveComponent;
+import com.asteroid.game.component.BulletComponent;
+import com.asteroid.game.component.CollidedComponent;
+import com.asteroid.game.component.DamageComponent;
+import com.asteroid.game.component.DeathComponent;
+import com.asteroid.game.component.PlayerComponent;
+import com.asteroid.game.component.RemoveComponent;
 
 import lombok.var;
 

@@ -1,11 +1,13 @@
-package com.asteroid.net.packet;
+package com.asteroid.shared.net.packet;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@Value
-public class PlayerControllerVibrate {
+@AllArgsConstructor
+@NoArgsConstructor
+public class PlayerControllerVibrate implements Packet {
 
-    private int vibrationTime;
+    public int vibrationTime;
 
-    private int vibrationStrength;
+    public int vibrationStrength;
 }

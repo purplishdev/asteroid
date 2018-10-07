@@ -1,8 +1,8 @@
-package com.asteroid.system;
+package com.asteroid.game.system;
 
 import com.artemis.BaseSystem;
 import com.artemis.ComponentMapper;
-import com.asteroid.component.MovementComponent;
+import com.asteroid.game.component.MovementComponent;
 
 import lombok.var;
 

@@ -1,7 +1,4 @@
-package com.asteroid.net.packet;
+package com.asteroid.shared.net.packet;
 
-import lombok.Value;
-
-@Value
-public class PlayerReady {
+public class PlayerReady implements Packet {
 }

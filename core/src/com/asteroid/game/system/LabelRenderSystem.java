@@ -1,12 +1,12 @@
-package com.asteroid.system;
+package com.asteroid.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.annotations.Wire;
-import com.asteroid.component.DeathComponent;
-import com.asteroid.component.LabelComponent;
-import com.asteroid.component.MovementComponent;
-import com.asteroid.component.RemoveComponent;
+import com.asteroid.game.component.DeathComponent;
+import com.asteroid.game.component.LabelComponent;
+import com.asteroid.game.component.MovementComponent;
+import com.asteroid.game.component.RemoveComponent;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

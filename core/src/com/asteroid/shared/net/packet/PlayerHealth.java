@@ -1,9 +1,11 @@
-package com.asteroid.net.packet;
+package com.asteroid.shared.net.packet;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@Value
-public class PlayerHealth {
+@AllArgsConstructor
+@NoArgsConstructor
+public class PlayerHealth implements Packet {
 
-    private int health;
+    public int health;
 }

@@ -1,9 +1,11 @@
-package com.asteroid.net.packet;
+package com.asteroid.shared.net.packet;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@Value
-public class PlayerPowerupPickup {
+@AllArgsConstructor
+@NoArgsConstructor
+public class PlayerPowerupPickup implements Packet {
 
     // TODO: change int to enum?
     private int powerupType;

@@ -1,13 +1,13 @@
-package com.asteroid.system;
+package com.asteroid.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.BaseEntitySystem;
 import com.artemis.ComponentMapper;
-import com.asteroid.component.CollidedComponent;
-import com.asteroid.component.CollisionComponent;
-import com.asteroid.component.DeathComponent;
-import com.asteroid.component.MovementComponent;
-import com.asteroid.component.RemoveComponent;
+import com.asteroid.game.component.CollidedComponent;
+import com.asteroid.game.component.CollisionComponent;
+import com.asteroid.game.component.DeathComponent;
+import com.asteroid.game.component.MovementComponent;
+import com.asteroid.game.component.RemoveComponent;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 

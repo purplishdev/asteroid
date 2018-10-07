@@ -1,4 +1,4 @@
-package com.asteroid.game.asset;
+package com.asteroid.shared.asset;
 
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.loaders.AssetLoader;

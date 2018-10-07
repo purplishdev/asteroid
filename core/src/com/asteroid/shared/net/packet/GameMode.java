@@ -1,9 +1,12 @@
-package com.asteroid.net.packet;
+package com.asteroid.shared.net.packet;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
-@Value
-public class GameMode {
+@AllArgsConstructor
+@NoArgsConstructor
+public class GameMode implements Packet {
 
-    private int mode;
+    public int mode;
 }

@@ -5,7 +5,7 @@ import com.artemis.annotations.PooledWeaver;
 import com.asteroid.shared.net.entity.EntityConnection;
 
 @PooledWeaver
-public class ConnectionComponent extends Component {
+public class NetworkComponent extends Component {
 
     public EntityConnection connection;
 }

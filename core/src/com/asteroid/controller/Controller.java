@@ -1,135 +1,73 @@
 package com.asteroid.controller;
 
-import com.asteroid.Constants;
-import com.asteroid.asset.AssetModule;
-import com.asteroid.asset.GdxAssetModule;
-import com.asteroid.net.packet.PlayerJoinGame;
-import com.asteroid.net.packet.PlayerMove;
+import com.asteroid.controller.screen.TestScreen;
+import com.asteroid.game.Constants;
+import com.asteroid.shared.asset.AssetModule;
+import com.asteroid.shared.asset.GdxAssetModule;
+import com.asteroid.shared.net.NetworkModule;
+import com.asteroid.shared.net.NetworkModuleImpl;
+import com.asteroid.shared.net.packet.PlayerJoinGame;
+import com.asteroid.shared.net.packet.PlayerMove;
+import com.asteroid.shared.screen.ScreenModule;
+import com.asteroid.shared.screen.ScreenModuleImpl;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esotericsoftware.kryonet.Client;
 
-import java.io.IOException;
+public class Controller implements ControllerContext, ApplicationListener {
 
-public class Controller implements ApplicationListener {
+    private NetworkModuleImpl networkModule;
+
+    private ScreenModule screenModule;
 
     private AssetModule assetModule;
 
     private SpriteBatch batch;
 
-    private Camera camera;
-
-    private Stage stage;
-
-    private Table table;
-
     private ExtendViewport viewport;
-
-    private Skin skin;
-
-    private Client client;
-
-    private PlayerMove playerMove = new PlayerMove();
 
     @Override
     public void create() {
+        createBatch();
+        createCameraAndViewport();
+        createAssets();
+        createNetwork();
+        createScreen();
+    }
 
-        // create kryo client
-        client = new Client();
-        client.getKryo().register(PlayerJoinGame.class);
-        client.getKryo().register(PlayerMove.class);
-        client.start();
-        try {
-            client.connect(5000, "127.0.0.1", 1337);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // initialize
-        batch = new SpriteBatch();
-        camera = new OrthographicCamera();
-        viewport = new ExtendViewport(1280, 720, camera);
-        stage = new Stage(viewport, batch);
-        stage.setDebugAll(true);
-        Gdx.input.setInputProcessor(stage);
-
-        // load assets
+    private void createAssets() {
         assetModule = new GdxAssetModule();
         assetModule.prepare(Constants.Assets.SKIN, Skin.class);
         assetModule.loadAll();
+    }
 
-        // get skin
-        skin = assetModule.get(Constants.Assets.SKIN);
+    private void createBatch() {
+        batch = new SpriteBatch();
+    }
 
-        // create main stage table
-        table = new Table();
-        table.setFillParent(true);
-        stage.addActor(table);
+    private void createCameraAndViewport() {
+        viewport = new ExtendViewport(1280, 720, new OrthographicCamera());
+    }
 
-        // create controls
-        TextField textField = new TextField("", skin);
+    private void createNetwork() {
+        networkModule = new NetworkModuleImpl();
+    }
 
-        TextButton button = new TextButton("Click me!", skin);
-        button.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("Button clicked!");
-                client.sendTCP(new PlayerJoinGame(textField.getText().trim()));
-            }
-        });
-
-        stage.addListener(new InputListener() {
-            @Override
-            public boolean keyDown(InputEvent event, int keycode) {
-                switch (keycode) {
-                    case Input.Keys.W:
-                        playerMove.deltaVelocity = Constants.Player.ACCELERATION_SPEED;
-                        System.out.println("W");
-                        return true;
-
-                    case Input.Keys.S:
-                        playerMove.deltaVelocity = Constants.Player.DECELERATION_SPEED;
-                        System.out.println("S");
-                        return true;
-
-                    case Input.Keys.A:
-                        playerMove.deltaRotationSpeed = Constants.Player.ROTATION_SPEED;
-                        System.out.println("A");
-                        return true;
-
-                    case Input.Keys.D:
-                        playerMove.deltaRotationSpeed = -Constants.Player.ROTATION_SPEED;
-                        System.out.println("D");
-                        return true;
-                }
-
-                return super.keyDown(event, keycode);
-            }
-        });
-
-        // add controls to main table
-        table.add(textField).center();
-        table.add(button).center();
+    private void createScreen() {
+        screenModule = new ScreenModuleImpl();
+        screenModule.setScreen(new TestScreen(this));
     }
 
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height, true);
+        screenModule.resize(width, height);
     }
 
     @Override
@@ -137,26 +75,42 @@ public class Controller implements ApplicationListener {
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        float delta = Gdx.graphics.getDeltaTime();
-        stage.act(delta);
-
-        client.sendTCP(playerMove);
-
-        stage.draw();
+        screenModule.update(Gdx.graphics.getDeltaTime());
+        screenModule.render(batch);
     }
 
     @Override
     public void pause() {
-
+        screenModule.pause();
     }
 
     @Override
     public void resume() {
-
+        screenModule.resume();
     }
 
     @Override
     public void dispose() {
+        screenModule.dispose();
+    }
 
+    @Override
+    public Viewport getViewport() {
+        return viewport;
+    }
+
+    @Override
+    public SpriteBatch getSpriteBatch() {
+        return batch;
+    }
+
+    @Override
+    public AssetModule getAssetModule() {
+        return assetModule;
+    }
+
+    @Override
+    public NetworkModule getNetworkModule() {
+        return networkModule;
     }
 }

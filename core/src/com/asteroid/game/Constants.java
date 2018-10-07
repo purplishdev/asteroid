@@ -1,4 +1,4 @@
-package com.asteroid.shared;
+package com.asteroid.game;
 
 import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
 

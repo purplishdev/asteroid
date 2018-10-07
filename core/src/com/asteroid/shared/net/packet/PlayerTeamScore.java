@@ -1,11 +1,13 @@
-package com.asteroid.net.packet;
+package com.asteroid.shared.net.packet;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@Value
-public class PlayerTeamScore {
+@AllArgsConstructor
+@NoArgsConstructor
+public class PlayerTeamScore implements Packet {
 
-    private int scoreTeamFirst;
+    public int scoreTeamFirst;
 
-    private int scoreTeamSecond;
+    public int scoreTeamSecond;
 }

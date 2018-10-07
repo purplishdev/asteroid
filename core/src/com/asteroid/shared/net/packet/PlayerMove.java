@@ -1,11 +1,11 @@
-package com.asteroid.net.packet;
+package com.asteroid.shared.net.packet;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlayerMove {
+public class PlayerMove implements Packet {
 
     public float deltaVelocity;
 

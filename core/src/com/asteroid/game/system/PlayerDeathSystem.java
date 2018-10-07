@@ -1,14 +1,14 @@
-package com.asteroid.system;
+package com.asteroid.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.systems.IteratingSystem;
-import com.asteroid.component.DeathComponent;
-import com.asteroid.component.ExplosionComponent;
-import com.asteroid.component.HealthComponent;
-import com.asteroid.component.PlayerComponent;
-import com.asteroid.component.WaitForSpawnComponent;
-import com.asteroid.factory.Particle;
+import com.asteroid.game.component.DeathComponent;
+import com.asteroid.game.component.ExplosionComponent;
+import com.asteroid.game.component.HealthComponent;
+import com.asteroid.game.component.PlayerComponent;
+import com.asteroid.game.component.WaitForSpawnComponent;
+import com.asteroid.game.factory.Particle;
 
 import lombok.var;
 

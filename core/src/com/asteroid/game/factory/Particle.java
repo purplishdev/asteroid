@@ -1,4 +1,4 @@
-package com.asteroid.factory;
+package com.asteroid.game.factory;
 
 public enum Particle {
     PLAYER_TRAIL,

@@ -1,4 +1,4 @@
-package com.asteroid.shared.screen.impl;
+package com.asteroid.shared.screen;
 
-public final class BlankScreen extends AbstractGameScreen {
+class BlankScreen extends AbstractGameScreen {
 }

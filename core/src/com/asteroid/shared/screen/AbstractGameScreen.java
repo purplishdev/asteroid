@@ -1,12 +1,13 @@
-package com.asteroid.shared.screen.impl;
+package com.asteroid.shared.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class AbstractGameScreen implements GameScreen {
 
-    protected final InputMultiplexer input;
+    private final InputMultiplexer input;
 
     public AbstractGameScreen() {
         input = new InputMultiplexer();
@@ -40,4 +41,8 @@ public abstract class AbstractGameScreen implements GameScreen {
 
     @Override
     public void dispose() { }
+
+    protected void addInputProcessor(InputProcessor processor) {
+        input.addProcessor(processor);
+    }
 }

@@ -1,25 +1,25 @@
-package com.asteroid.system.net;
+package com.asteroid.game.system.net;
 
 import com.artemis.Aspect;
 import com.artemis.BaseEntitySystem;
 import com.artemis.ComponentMapper;
-import com.asteroid.component.ConnectionComponent;
-import com.asteroid.component.MovementComponent;
-import com.asteroid.net.packet.PlayerMove;
-import com.asteroid.system.InputSystem;
-import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
+import com.asteroid.game.component.MovementComponent;
+import com.asteroid.game.component.NetworkComponent;
+import com.asteroid.game.system.InputSystem;
+import com.asteroid.shared.net.entity.EntityConnection;
+import com.asteroid.shared.net.packet.PlayerMove;
 
+import lombok.NonNull;
 import lombok.var;
 
 public class NetworkInputSystem extends BaseEntitySystem {
 
-    private ComponentMapper<ConnectionComponent> connectionMapper;
+    private ComponentMapper<NetworkComponent> networkMapper;
 
     private InputSystem inputSystem;
 
     public NetworkInputSystem() {
-        super(Aspect.all(ConnectionComponent.class, MovementComponent.class));
+        super(Aspect.all(NetworkComponent.class, MovementComponent.class));
     }
 
     @Override
@@ -27,22 +27,16 @@ public class NetworkInputSystem extends BaseEntitySystem {
 
     @Override
     protected void inserted(int entity) {
-        var connection = connectionMapper.get(entity);
-        if (connection == null) {
+        var network = networkMapper.get(entity);
+        if (network == null) {
             return;
         }
 
-        connection.connection.addListener(new Listener() {
-            @Override
-            public void received(Connection connection, Object packet) {
-                if (packet instanceof PlayerMove) {
-                    move(entity, (PlayerMove)packet);
-                }
-            }
-        });
+        network.connection.addPacketListener(PlayerMove.class, this::move);
     }
 
-    private void move(int entity, PlayerMove packet) {
+    private void move(@NonNull EntityConnection connection, PlayerMove packet) {
+        int entity = connection.getEntityId();
         inputSystem.move(entity, packet.deltaVelocity);
         inputSystem.rotate(entity, packet.deltaRotationSpeed);
     }

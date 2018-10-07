@@ -1,4 +1,4 @@
-package com.asteroid.system;
+package com.asteroid.game.system;
 
 import com.artemis.Aspect;
 import com.artemis.BaseEntitySystem;
