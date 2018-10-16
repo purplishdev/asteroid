@@ -5,16 +5,17 @@ import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
 public final class Constants {
 
     public static class Assets {
-        public static final String ATLAS = "asteroid.atlas";
+        public static final String BASE_PATH = "assets/";
+        public static final String ATLAS = BASE_PATH + "asteroid.atlas";
         public static final String PLAYER_TEXTURE = "player";
-        public static final String PLAYER_POLYGON = "player.psh";
+        public static final String PLAYER_POLYGON = BASE_PATH + "player.psh";
         public static final String LASER_TEXTURE = "laser";
-        public static final String LASER_POLYGON = "laser.psh";
+        public static final String LASER_POLYGON = BASE_PATH + "laser.psh";
         public static final String FONT_32 = "font_32";
-        public static final String SKIN = "asteroid.json";
+        public static final String SKIN = BASE_PATH + "asteroid.json";
 
-        public static final String TRAIL_PARTICLE = "effects/exhaust.p";
-        public static final String EXPLOSION_PARTICLE = "effects/explosion.p";
+        public static final String TRAIL_PARTICLE = BASE_PATH + "effects/exhaust.p";
+        public static final String EXPLOSION_PARTICLE = BASE_PATH + "effects/explosion.p";
 
         public static ParticleEffectLoader.ParticleEffectParameter PARTICLE_EFFECT_PARAMS;
 
